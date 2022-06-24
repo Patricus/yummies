@@ -28,7 +28,7 @@ store = {
 
 # Database Schema
 
-![database](./yelp-database.jpg)
+![database](./db-schema.jpg)
 
 | Project Name:      | Yummies                                                                             |
 | ------------------ | ----------------------------------------------------------------------------------- |
