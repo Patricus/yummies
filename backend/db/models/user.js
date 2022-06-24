@@ -1,5 +1,5 @@
 "use strict";
-const { Validator } = require("sequelize");
+const { Validator, Model } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
 module.exports = (sequelize, DataTypes) => {
@@ -52,6 +52,8 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     // associations can be defined here
+    User.hasMany(models.Business, { foreignKey: "ownerId" });
+    User.hasMany(models.Review, { foreignKey: "userId" });
   };
 
   User.prototype.toSafeObject = function () {

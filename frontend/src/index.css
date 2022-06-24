@@ -1,1 +1,52 @@
 /* TODO Add site wide styles */
+:root {
+  --bg-color: #ebebeb;
+  --font-color: #38302e;
+  --trim-color: #f39237;
+  --blue-color: #106594;
+  --red-color: #d8464b;
+}
+
+html {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+}
+
+a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--blue-color);
+  position: relative;
+}
+
+a::after {
+  content: "";
+  background-color: var(--trim-color);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transition: transform 200ms;
+}
+
+a:hover::after {
+  transform: scaleX(100%);
+  transform-origin: center;
+}
+
+button {
+  padding: 3px 10px;
+  border: 2px solid var(--font-color);
+  background-color: var(--trim-color);
+  border-radius: 10px;
+  color: var(--blue-color);
+  font-weight: 600;
+}
+
+button:hover {
+  border: 2px solid var(--trim-color);
+  background-color: var(--blue-color);
+  color: var(--bg-color);
+}
