@@ -119,10 +119,11 @@ router.patch(
       next(err);
     }
   })
+);
 
-  //Delete
+//Delete
 
-  router.delete(
+router.delete(
   "/:id(\\d+)",
   requireAuth,
   asyncHandler(async (req, res, next) => {
@@ -134,10 +135,10 @@ router.patch(
     });
 
     if (req.user.id === business.ownerId) {
-      await business.destroy();
+      await business.delete();
 
       res.status(201);
-      res.json(JSON.stringify({ id: business })).end();
+      res.json({ message: "business deleted" }).end();
     } else {
       const err = Error("You do not own this business.");
       err.status = 401;
