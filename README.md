@@ -32,7 +32,7 @@ store = {
 
 # Database Schema
 
-![database](./db-schema.jpg)
+![database](./db-schema.png)
 
 | Project Name:      | Yummies                                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------------------- |

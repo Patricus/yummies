@@ -10,11 +10,12 @@
 html {
   background-color: var(--bg-color);
   color: var(--font-color);
+  font-family: "EB Garamond", serif;
 }
 
 a {
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--blue-color);
   position: relative;
 }
@@ -37,16 +38,21 @@ a:hover::after {
 }
 
 button {
-  padding: 3px 10px;
+  padding: 2px 10px;
   border: 2px solid var(--font-color);
   background-color: var(--trim-color);
   border-radius: 10px;
   color: var(--blue-color);
   font-weight: 600;
+  margin: 1px 5px;
 }
 
 button:hover {
   border: 2px solid var(--trim-color);
   background-color: var(--blue-color);
   color: var(--bg-color);
+}
+
+label {
+  font-weight: 600;
 }
