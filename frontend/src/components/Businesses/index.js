@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { allBusinesses } from "../../store/business";
 import BusinessCard from "./BusinessCard";
 
@@ -24,11 +23,7 @@ function Businesses() {
           businesses.map(business => {
             return (
               <li key={business.id}>
-                <Link to={`/api/businesses/${business.id}`}>
-                  <div className="businessCard">
-                    <h2>{business.title}</h2>
-                  </div>
-                </Link>
+                <BusinessCard {...business} />
               </li>
             );
           })}

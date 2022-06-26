@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getBusiness } from "../../../store/business";
-//todo create store/business
+import yummiesPic from "../../images/yummies.png";
 
 function BusinessCard(business) {
-  //Find business by id
-
+  const { id, title } = business;
   return (
-    <Link to={`/businesses/${business.id}`}>
+    <Link to={`/businesses/${id}`}>
       <div className="businessCard">
         <div className="imgFrame">
-          <img src={`../../../images/businesses/${business.id}`} alt={business.title} />
+          <img src={yummiesPic} alt={title} />
         </div>
         <div className="cardData">
-          <h2>{business.title}</h2>
-          <div>{business.rating}</div>
+          <h2>{title}</h2>
+          {/* <div>{rating}</div> */}
         </div>
       </div>
     </Link>
