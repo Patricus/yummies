@@ -1,7 +1,7 @@
-const CREATE_BUSINESS = "business/CREATE";
-const READ_BUSINESS = "business/READ";
-const UPDATE_BUSINESS = "business/UPDATE";
-const DELETE_BUSINESS = "business/DELETE";
+const CREATE_BUSINESS = "businessDetail/CREATE";
+const READ_BUSINESS = "businessDetail/READ";
+const UPDATE_BUSINESS = "businessDetail/UPDATE";
+const DELETE_BUSINESS = "businessDetail/DELETE";
 
 //Action Creators
 
@@ -10,9 +10,9 @@ const createBusiness = business => ({
   business,
 });
 
-const readBusinesses = businesses => ({
+const readBusinesses = business => ({
   type: READ_BUSINESS,
-  businesses,
+  business,
 });
 
 const patchBusiness = business => ({
@@ -51,16 +51,6 @@ export const getBusiness = businessId => async dispatch => {
   }
 };
 
-export const allBusinesses = () => async dispatch => {
-  const res = await fetch("/api/businesses");
-
-  if (res.ok) {
-    const businesses = await res.json();
-    dispatch(readBusinesses(businesses));
-    return businesses;
-  }
-};
-
 export const updateBusiness = business => async dispatch => {
   const res = await fetch(`/api/businesses/${business.id}`);
 
@@ -82,39 +72,28 @@ export const removeBusiness = businessId => async dispatch => {
 };
 
 //Reducer
-const businessReducer = (state = {}, action) => {
+const businessDetailReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_BUSINESS:
       const createState = { ...state };
-      createState.businessDetail = {};
-      createState.businessDetail[action.business.id] = action.business;
-      createState.allBusinesses[action.business.id] = action.business;
+      createState = {};
+      createState[action.business.id] = action.business;
       return createState;
 
     case READ_BUSINESS:
-      const readState = { ...state };
-      if (action.businesses) {
-        action.businesses.forEach(business => {
-          readState[business.id] = business;
-        });
-        return readState;
-      } else {
-        readState.businessDetail = {};
-        readState.businessDetail[action.business.id] = action.business;
-        return readState;
-      }
+      const readState = {};
+      readState[action.business.id] = action.business;
+      return readState;
 
     case UPDATE_BUSINESS:
       const updateState = { ...state };
-      updateState.businessDetail = {};
-      updateState.businessDetail[action.business.id] = action.business;
-      updateState.allBusinesses[action.business.id] = action.business;
+      updateState = {};
+      updateState[action.business.id] = action.business;
       return updateState;
 
     case DELETE_BUSINESS:
       const deleteState = { ...state };
-      deleteState.businessDetail = {};
-      delete deleteState.allBusinesses[action.business.id];
+      deleteState = {};
       return deleteState;
 
     default:
@@ -122,4 +101,4 @@ const businessReducer = (state = {}, action) => {
   }
 };
 
-export default businessReducer;
+export default businessDetailReducer;

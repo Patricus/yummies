@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allBusinesses } from "../../store/business";
+import { allBusinesses } from "../../store/businesses";
 import BusinessCard from "./BusinessCard";
 
 function Businesses() {
