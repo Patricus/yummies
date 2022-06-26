@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const CREATE_BUSINESS = "businessDetail/CREATE";
 const READ_BUSINESS = "businessDetail/READ";
 const UPDATE_BUSINESS = "businessDetail/UPDATE";
@@ -28,7 +30,7 @@ const deleteBusiness = businessId => ({
 //Thunks
 
 export const addBusiness = business => async dispatch => {
-  const res = await fetch("/api/businesses", {
+  const res = await csrfFetch("/api/businesses", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(business),
@@ -42,7 +44,7 @@ export const addBusiness = business => async dispatch => {
 };
 
 export const getBusiness = businessId => async dispatch => {
-  const res = await fetch(`/api/businesses/${businessId}`);
+  const res = await csrfFetch(`/api/businesses/${businessId}`);
 
   if (res.ok) {
     const business = await res.json();
@@ -52,7 +54,7 @@ export const getBusiness = businessId => async dispatch => {
 };
 
 export const updateBusiness = business => async dispatch => {
-  const res = await fetch(`/api/businesses/${business.id}`);
+  const res = await csrfFetch(`/api/businesses/${business.id}`);
 
   if (res.ok) {
     const updatedBusiness = await res.json();
@@ -62,7 +64,7 @@ export const updateBusiness = business => async dispatch => {
 };
 
 export const removeBusiness = businessId => async dispatch => {
-  const res = await fetch(`/api/businesses/${businessId}`, {
+  const res = await csrfFetch(`/api/businesses/${businessId}`, {
     method: "DELETE",
   });
 

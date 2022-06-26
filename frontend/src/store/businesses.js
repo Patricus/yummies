@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const READ_BUSINESSES = "businesses/READ";
 
 //Action Creators
@@ -10,7 +12,7 @@ const readBusinesses = businesses => ({
 //Thunks
 
 export const allBusinesses = () => async dispatch => {
-  const res = await fetch("/api/businesses");
+  const res = await csrfFetch("/api/businesses");
 
   if (res.ok) {
     const businesses = await res.json();
