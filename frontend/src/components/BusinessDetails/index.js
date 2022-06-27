@@ -38,11 +38,18 @@ function BusinessDetails() {
     dispatch(getBusiness(businessId));
   }, [dispatch]);
 
+  const deleteBusiness = () => {};
+
   return (
     business && (
       <div>
         <h1>{title}</h1>
-        {sessionUser.id === business.ownerId && <UpdateBusinessFrom {...business} />}
+        {sessionUser.id === business.ownerId && (
+          <>
+            <UpdateBusinessFrom {...business} />
+            <button onClick={deleteBusiness}>Delete Restaurant</button>
+          </>
+        )}
         {image ? (
           <img src={image} alt={`Picture of ${title}`} />
         ) : (

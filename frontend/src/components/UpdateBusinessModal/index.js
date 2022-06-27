@@ -9,7 +9,7 @@ function UpdateBusinessModal(business) {
       <button onClick={() => setShowModal(true)}>Edit Restaurant</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <UpdateBusinessForm {...business} />
+          <UpdateBusinessForm business={business} setShowModal={setShowModal} />
         </Modal>
       )}
     </>

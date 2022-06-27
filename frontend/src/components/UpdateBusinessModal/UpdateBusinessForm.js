@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateBusiness } from "../../store/businessDetail";
 
-function UpdateBusinessFrom(business) {
+function UpdateBusinessFrom({ business, setShowModal }) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState(business.title);
@@ -12,11 +12,11 @@ function UpdateBusinessFrom(business) {
   const [city, setCity] = useState(business.city);
   const [zipCode, setZipCode] = useState(business.zipCode);
 
-  const submit = e => {
+  const submit = async e => {
     e.preventDefault();
     setErrors([]);
 
-    return dispatch(
+    await dispatch(
       updateBusiness({
         id: business.id,
         title,
@@ -29,6 +29,7 @@ function UpdateBusinessFrom(business) {
     ).catch(async res => {
       if (res && res.errors) setErrors(res.errors);
     });
+    setShowModal(false);
   };
 
   return (

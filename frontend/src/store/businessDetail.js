@@ -93,8 +93,6 @@ const businessDetailReducer = (state = {}, action) => {
 
     case UPDATE_BUSINESS:
       const updateState = {};
-      console.log("action.business", action.business);
-      console.log("action.business.id", action.business.id);
       updateState[action.business.id] = action.business;
       return updateState;
 

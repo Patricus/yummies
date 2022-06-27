@@ -115,7 +115,7 @@ router.patch(
       });
 
       res.status(201);
-      res.json(JSON.stringify(business)).end();
+      res.json(business).end();
     } else {
       const err = Error("You do not own this business.");
       err.status = 401;
