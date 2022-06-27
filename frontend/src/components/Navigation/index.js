@@ -3,18 +3,32 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
+import { useHistory } from "react-router-dom";
+
 import logo from "../images/logo.png";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
+  const history = useHistory();
+
+  const addRestaurant = e => {
+    e.preventDefault();
+    history.push("/businesses/new");
+  };
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
+      <>
+        <li>
+          <button onClick={addRestaurant}>Create a restaurant</button>
+        </li>
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
+      </>
     );
   } else {
     sessionLinks = (
