@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 const { Business, User } = require("../../db/models");
-const { setTokenCookie, requireAuth } = require("../../utils/auth");
+const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
@@ -14,25 +14,30 @@ const validateBusiness = [
   check("ownerId").exists({ checkFalsy: true }).withMessage("Must be logged in."),
   check("title")
     .exists({ checkFalsy: true })
+    .withMessage("Please provide a title.")
     .isLength({ max: 95 })
-    .withMessage("Please provide a title with 95 characters or less."),
+    .withMessage("Title must be 95 characters or less."),
   check("description").exists({ checkFalsy: true }).withMessage("Please provide a description."),
   check("address")
     .exists({ checkFalsy: true })
+    .withMessage("Please provide an address.")
     .isLength({ max: 95 })
-    .withMessage("Please provide an address with 95 characters or less."),
+    .withMessage("Address must be 95 characters or less."),
   check("city")
     .exists({ checkFalsy: true })
+    .withMessage("Please provide a city.")
     .isLength({ max: 35 })
-    .withMessage("Please provide a city with 35 characters or less."),
+    .withMessage("City must be 35 characters or less."),
   check("state")
     .exists({ checkFalsy: true })
+    .withMessage("Please provide a state.")
     .isLength({ max: 15 })
-    .withMessage("Please provide a state with 15 characters or less."),
+    .withMessage("State must be 15 characters or less."),
   check("zipCode")
     .exists({ checkFalsy: true })
+    .withMessage("Please provide a zip code.")
     .isLength({ max: 10 })
-    .withMessage("Please provide a zip code with 10 characters or less."),
+    .withMessage("Xip code must be 10 characters or less."),
   handleValidationErrors,
 ];
 
@@ -41,10 +46,10 @@ router.post(
   requireAuth,
   validateBusiness,
   asyncHandler(async (req, res, next) => {
-    const { user, title, description, address, city, state, zipCode } = req.body;
+    const { ownerId, title, description, address, city, state, zipCode } = req.body;
 
     const newBusiness = await Business.create({
-      ownerId: user.id,
+      ownerId,
       title,
       description,
       address,
@@ -53,9 +58,8 @@ router.post(
       zipCode,
     });
 
-    const newBusId = newBusiness.id;
     res.status(201);
-    res.json(JSON.stringify({ newBusId: newBusiness })).end();
+    res.json(JSON.stringify({ newBusiness })).end();
   })
 );
 
@@ -111,7 +115,7 @@ router.patch(
       });
 
       res.status(201);
-      res.json(JSON.stringify({ id: business })).end();
+      res.json(business).end();
     } else {
       const err = Error("You do not own this business.");
       err.status = 401;
@@ -127,6 +131,7 @@ router.delete(
   "/:id(\\d+)",
   requireAuth,
   asyncHandler(async (req, res, next) => {
+    console.log("DELETE ROUTE");
     const id = req.params.id;
     const business = await Business.findOne({
       where: {
@@ -135,7 +140,7 @@ router.delete(
     });
 
     if (req.user.id === business.ownerId) {
-      await business.delete();
+      await business.destroy();
 
       res.status(201);
       res.json({ message: "business deleted" }).end();
