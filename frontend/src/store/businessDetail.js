@@ -54,11 +54,15 @@ export const getBusiness = businessId => async dispatch => {
 };
 
 export const updateBusiness = business => async dispatch => {
-  const res = await csrfFetch(`/api/businesses/${business.id}`);
+  const res = await csrfFetch(`/api/businesses/${business.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(business),
+  });
 
   if (res.ok) {
     const updatedBusiness = await res.json();
-    dispatch(patchBusiness(updateBusiness));
+    dispatch(patchBusiness(updatedBusiness));
     return updateBusiness;
   }
 };
@@ -88,7 +92,6 @@ const businessDetailReducer = (state = {}, action) => {
 
     case UPDATE_BUSINESS:
       const updateState = { ...state };
-      updateState = {};
       updateState[action.business.id] = action.business;
       return updateState;
 
