@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import ConfirmDelete from "./ConfirmDelete";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
-function ConfirmDelete() {
+function ConfirmDelete(businessId) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
+      <button onClick={() => setShowModal(true)}>Delete Restaurant</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <ConfirmDelete />
+          <ConfirmDeleteModal setShowModal={setShowModal} businessId={businessId} />
         </Modal>
       )}
     </>

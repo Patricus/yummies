@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getBusiness } from "../../store/businessDetail";
 import yummiesPic from "../images/yummies.png";
 import UpdateBusinessFrom from "../UpdateBusinessModal";
+import ConfirmDelete from "../ConfirmDelete";
 
 function BusinessDetails() {
   const [title, setTitle] = useState("");
@@ -38,8 +39,6 @@ function BusinessDetails() {
     dispatch(getBusiness(businessId));
   }, [dispatch]);
 
-  const deleteBusiness = () => {};
-
   return (
     business && (
       <div>
@@ -47,7 +46,7 @@ function BusinessDetails() {
         {sessionUser.id === business.ownerId && (
           <>
             <UpdateBusinessFrom {...business} />
-            <button onClick={deleteBusiness}>Delete Restaurant</button>
+            <ConfirmDelete businessId={businessId} />
           </>
         )}
         {image ? (

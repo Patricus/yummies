@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 const { Business, User } = require("../../db/models");
-const { setTokenCookie, requireAuth } = require("../../utils/auth");
+const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
@@ -131,6 +131,7 @@ router.delete(
   "/:id(\\d+)",
   requireAuth,
   asyncHandler(async (req, res, next) => {
+    console.log("DELETE ROUTE");
     const id = req.params.id;
     const business = await Business.findOne({
       where: {
@@ -139,7 +140,7 @@ router.delete(
     });
 
     if (req.user.id === business.ownerId) {
-      await business.delete();
+      await business.destroy();
 
       res.status(201);
       res.json({ message: "business deleted" }).end();
