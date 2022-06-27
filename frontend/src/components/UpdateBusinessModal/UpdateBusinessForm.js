@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateBusiness } from "../../store/businessDetail";
-import { useHistory } from "react-router-dom";
 
 function UpdateBusinessFrom(business) {
   const dispatch = useDispatch();
@@ -28,8 +27,7 @@ function UpdateBusinessFrom(business) {
         zipCode,
       })
     ).catch(async res => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
+      if (res && res.errors) setErrors(res.errors);
     });
   };
 

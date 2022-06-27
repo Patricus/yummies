@@ -62,6 +62,7 @@ export const updateBusiness = business => async dispatch => {
 
   if (res.ok) {
     const updatedBusiness = await res.json();
+    console.log("updatedBusiness", updatedBusiness);
     dispatch(patchBusiness(updatedBusiness));
     return updateBusiness;
   }
@@ -91,13 +92,15 @@ const businessDetailReducer = (state = {}, action) => {
       return readState;
 
     case UPDATE_BUSINESS:
-      const updateState = { ...state };
+      const updateState = {};
+      console.log("action.business", action.business);
+      console.log("action.business.id", action.business.id);
       updateState[action.business.id] = action.business;
       return updateState;
 
     case DELETE_BUSINESS:
       const deleteState = { ...state };
-      deleteState = {};
+      delete deleteState[action.businessId];
       return deleteState;
 
     default:

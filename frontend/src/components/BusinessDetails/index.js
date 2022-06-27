@@ -6,6 +6,13 @@ import yummiesPic from "../images/yummies.png";
 import UpdateBusinessFrom from "../UpdateBusinessModal";
 
 function BusinessDetails() {
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const { businessId } = useParams();
 
   const dispatch = useDispatch();
@@ -17,26 +24,37 @@ function BusinessDetails() {
   });
 
   useEffect(() => {
+    if (!business) return;
+    setTitle(business.title);
+    setImage(business.image);
+    setDescription(business.description);
+    setAddress(business.address);
+    setCity(business.city);
+    setState(business.state);
+    setZipCode(business.zipCode);
+  }, [business]);
+
+  useEffect(() => {
     dispatch(getBusiness(businessId));
   }, [dispatch]);
 
   return (
     business && (
       <div>
-        <h1>{business.title}</h1>
+        <h1>{title}</h1>
         {sessionUser.id === business.ownerId && <UpdateBusinessFrom {...business} />}
-        {business.image ? (
-          <img src={business.image} alt={`Picture of ${business.title}`} />
+        {image ? (
+          <img src={image} alt={`Picture of ${title}`} />
         ) : (
-          <img src={yummiesPic} alt={`Picture of ${business.title}`} />
+          <img src={yummiesPic} alt={`Picture of ${title}`} />
         )}
 
-        <p>{business.description}</p>
+        <p>{description}</p>
         <div>
-          <div>{business.address}</div>
-          <div>{business.city}</div>
-          <div>{business.state}</div>
-          <div>{business.zipCode}</div>
+          <div>{address}</div>
+          <div>{city}</div>
+          <div>{state}</div>
+          <div>{zipCode}</div>
         </div>
       </div>
     )
