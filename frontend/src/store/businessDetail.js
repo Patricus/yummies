@@ -78,7 +78,6 @@ const businessDetailReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_BUSINESS:
       const createState = { ...state };
-      createState = {};
       createState[action.business.id] = action.business;
       return createState;
 
