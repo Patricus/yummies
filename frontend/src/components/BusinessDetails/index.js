@@ -43,7 +43,7 @@ function BusinessDetails() {
     business && (
       <div>
         <h1>{title}</h1>
-        {sessionUser.id === business.ownerId && (
+        {sessionUser && sessionUser.id === business.ownerId && (
           <>
             <UpdateBusinessFrom {...business} />
             <ConfirmDelete businessId={businessId} />
