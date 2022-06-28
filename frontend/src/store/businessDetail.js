@@ -62,7 +62,6 @@ export const updateBusiness = business => async dispatch => {
 
   if (res.ok) {
     const updatedBusiness = await res.json();
-    console.log("updatedBusiness", updatedBusiness);
     dispatch(patchBusiness(updatedBusiness));
     return updateBusiness;
   }
