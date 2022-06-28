@@ -1,8 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
-
-const { Business } = require("../../db/models");
+const { Business, Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -69,7 +68,12 @@ router.post(
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
-    const businesses = await Business.findAll();
+    const businesses = await Business.findAll({
+      include: {
+        model: Review,
+        attributes: ["rating"],
+      },
+    });
 
     res.json(businesses);
   })
@@ -83,6 +87,10 @@ router.get(
     const business = await Business.findOne({
       where: {
         id,
+      },
+      include: {
+        model: Review,
+        attributes: ["rating"],
       },
     });
 

@@ -12,9 +12,9 @@ const createReview = review => ({
   review,
 });
 
-const readReviews = review => ({
+const readReviews = reviews => ({
   type: READ_REVIEW,
-  review,
+  reviews,
 });
 
 const patchReview = review => ({
@@ -48,6 +48,7 @@ export const getReviews = businessId => async dispatch => {
 
   if (res.ok) {
     const reviews = await res.json();
+    console.log("reviews", reviews);
     dispatch(readReviews(reviews));
     return reviews;
   }
@@ -81,13 +82,16 @@ export const removeReview = reviewId => async dispatch => {
 const reviewReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_REVIEW:
+      const review = action.review;
       const createState = { ...state };
-      createState[action.review.id] = action.review;
+      createState[review.id] = { ...review };
       return createState;
 
     case READ_REVIEW:
       const readState = {};
-      readState[action.review.id] = action.review;
+      action.reviews.forEach(review => {
+        readState[review.id] = review;
+      });
       return readState;
 
     case UPDATE_REVIEW:

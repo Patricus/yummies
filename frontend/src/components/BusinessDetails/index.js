@@ -6,6 +6,8 @@ import yummiesPic from "../images/yummies.png";
 import UpdateBusinessFrom from "../UpdateBusinessModal";
 import ConfirmDelete from "../ConfirmDelete";
 import { getReviews } from "../../store/reviews";
+import ReviewCard from "./ReviewCard";
+import CreateReview from "./CreateReview";
 
 function BusinessDetails() {
   const [title, setTitle] = useState("");
@@ -38,7 +40,7 @@ function BusinessDetails() {
   }, [business]);
 
   useEffect(() => {
-    setReviewList(...Object.values(reviews));
+    setReviewList(Object.values(reviews));
   }, [reviews]);
 
   useEffect(() => {
@@ -61,7 +63,8 @@ function BusinessDetails() {
         ) : (
           <img src={yummiesPic} alt={`Picture of ${title}`} />
         )}
-
+        <div>{business.Reviews.reduce((total, rating) => total + rating.rating, 0)}</div>
+        {sessionUser && <CreateReview {...businessId} />}
         <p>{description}</p>
         <div>
           <div>{address}</div>
@@ -72,20 +75,9 @@ function BusinessDetails() {
         <div>
           <h2>Reviews</h2>
           <ul>
-            {reviewList &&
+            {reviewList.length &&
               reviewList.map(review => {
-                {
-                  console.log("review", review);
-                }
-                return (
-                  <li key={review.id}>
-                    <div>
-                      <div>{review.User.username}</div>
-                      <div>{review.rating}</div>
-                    </div>
-                    <div>{review.comment}</div>
-                  </li>
-                );
+                return <ReviewCard {...review} key={review.id} />;
               })}
           </ul>
         </div>

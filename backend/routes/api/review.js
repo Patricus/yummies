@@ -42,7 +42,11 @@ router.post(
     });
 
     res.status(201);
-    return res.json(newReview);
+    newReviewUser = await Review.findOne({
+      where: { id: newReview.id },
+      include: User,
+    });
+    return res.json(newReviewUser);
   })
 );
 
