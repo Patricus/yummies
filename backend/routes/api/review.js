@@ -91,7 +91,11 @@ router.patch(
       });
 
       res.status(201);
-      return res.json(review);
+      updatedReviewUser = await Review.findOne({
+        where: { id: review.id },
+        include: User,
+      });
+      return res.json(updatedReviewUser);
     } else {
       const err = Error("You do not own this business.");
       err.status = 401;
@@ -118,7 +122,7 @@ router.delete(
       await review.destroy();
 
       res.status(201);
-      res.json({ message: "review deleted" }).end();
+      res.json({ message: "Review deleted." }).end();
     } else {
       const err = Error("You do not own this review.");
       err.status = 401;

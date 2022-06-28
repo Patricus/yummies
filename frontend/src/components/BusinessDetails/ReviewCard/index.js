@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import UpdateReviewModal from "./UpdateReview";
+import DeleteReview from "./DeleteReview";
 
 function ReviewCard(review) {
-  const [rating, setRating] = useState(review.rating);
-  const [comment, setComment] = useState(review.comment);
-  const [editReview, setEditReview] = useState(false);
-
   const sessionUser = useSelector(state => state.session.user);
+
+  const rating = useSelector(state => {
+    if (state.reviews[review.id]) return state.reviews[review.id].rating;
+  });
+  const comment = useSelector(state => {
+    if (state.reviews[review.id]) return state.reviews[review.id].comment;
+  });
 
   return (
     <li key={review.id}>
@@ -15,7 +20,8 @@ function ReviewCard(review) {
         <li>{rating}</li>
         {sessionUser && sessionUser.id === review.userId && (
           <>
-            <button onClick={() => setEditReview(true)}>Edit Review</button>
+            <UpdateReviewModal {...review} />
+            <DeleteReview reviewId={review.id} />
           </>
         )}
       </ul>

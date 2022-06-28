@@ -5,8 +5,8 @@ import { updateReview } from "../../../../store/reviews";
 function UpdateReviewFrom({ review, setShowModal }) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
-  const [rating, setRating] = useState(review.title);
-  const [comment, setComment] = useState(review.description);
+  const [rating, setRating] = useState(review.rating);
+  const [comment, setComment] = useState(review.comment);
 
   const submit = async e => {
     e.preventDefault();
@@ -14,13 +14,17 @@ function UpdateReviewFrom({ review, setShowModal }) {
 
     await dispatch(
       updateReview({
+        id: review.id,
+        userId: review.userId,
+        businessId: review.businessId,
         rating,
         comment,
       })
-    ).catch(async res => {
-      if (res && res.errors) setErrors(res.errors);
-    });
-    setShowModal(false);
+    )
+      .then(setShowModal(false))
+      .catch(async res => {
+        if (res && res.errors) setErrors(res.errors);
+      });
   };
 
   return (
@@ -33,7 +37,7 @@ function UpdateReviewFrom({ review, setShowModal }) {
       <label htmlFor="rating">Rating</label>
       <input
         name="rating"
-        type="text"
+        type="number"
         value={rating}
         onChange={e => setRating(e.target.value)}
         required

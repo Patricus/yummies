@@ -48,14 +48,13 @@ export const getReviews = businessId => async dispatch => {
 
   if (res.ok) {
     const reviews = await res.json();
-    console.log("reviews", reviews);
     dispatch(readReviews(reviews));
     return reviews;
   }
 };
 
 export const updateReview = review => async dispatch => {
-  const res = await csrfFetch(`/api/reviews/${review.id}`, {
+  const res = await csrfFetch(`/api/reviews/${review.businessId}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(review),
@@ -95,7 +94,7 @@ const reviewReducer = (state = {}, action) => {
       return readState;
 
     case UPDATE_REVIEW:
-      const updateState = {};
+      const updateState = { ...state };
       updateState[action.review.id] = action.review;
       return updateState;
 

@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { Modal } from "../../../../context/Modal";
-import UpdateReviewFrom from "./UpdateReviewForm";
+import ConfirmDeleteReviewModal from "./ConfirmDeleteReview";
 
-function UpdateReviewModal(review) {
+function DeleteReview(reviewId) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit Review</button>
+      <button onClick={() => setShowModal(true)}>Delete Review</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <UpdateReviewFrom review={review} setShowModal={setShowModal} />
+          <ConfirmDeleteReviewModal {...reviewId} setShowModal={setShowModal} />
         </Modal>
       )}
     </>
   );
 }
 
-export default UpdateReviewModal;
+export default DeleteReview;
