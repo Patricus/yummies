@@ -15,7 +15,7 @@ function ConfirmDeleteModal({ setShowModal, businessId: { businessId } }) {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
     });
-    history.push("/");
+    history.push("/businesses");
   };
 
   const cancelDelete = () => {
