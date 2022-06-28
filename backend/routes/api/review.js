@@ -42,28 +42,33 @@ router.post(
     });
 
     res.status(201);
-    res.json(newReview).end();
+    return res.json(newReview);
   })
 );
 
 //Read
 
-//All
+//All from business
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
     let reviews;
     if (req.body.businessId) {
+      const businessId = req.body.businessId;
       reviews = await Review.findAll({
         where: {
           businessId,
         },
       });
-    } else {
-      reviews = await Review.findAll();
-    }
 
-    res.json(reviews);
+      return res.json(reviews);
+    } else {
+      const err = Error("Bad request.");
+      err.errors = ["No business id."];
+      err.status = 400;
+      err.title = "Bad request.";
+      next(err);
+    }
   })
 );
 
@@ -78,7 +83,7 @@ router.get(
       },
     });
 
-    res.json(review);
+    return res.json(review);
   })
 );
 
@@ -87,6 +92,7 @@ router.get(
 router.patch(
   "/:id(\\d+)",
   requireAuth,
+  validateReview,
   asyncHandler(async (req, res, next) => {
     const id = req.params.id;
     const { rating, comment } = req.body;
@@ -104,7 +110,7 @@ router.patch(
       });
 
       res.status(201);
-      res.json(review).end();
+      return res.json(review);
     } else {
       const err = Error("You do not own this business.");
       err.status = 401;
