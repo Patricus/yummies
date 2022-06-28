@@ -2,7 +2,7 @@ const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
-const { Business, User } = require("../../db/models");
+const { Business } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -131,7 +131,6 @@ router.delete(
   "/:id(\\d+)",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    console.log("DELETE ROUTE");
     const id = req.params.id;
     const business = await Business.findOne({
       where: {
