@@ -25,7 +25,7 @@ export const allBusinesses = () => async dispatch => {
 const businessesReducer = (state = {}, action) => {
   switch (action.type) {
     case READ_BUSINESSES:
-      const readState = { ...state };
+      const readState = {};
       action.businesses.forEach(business => {
         readState[business.id] = business;
       });
