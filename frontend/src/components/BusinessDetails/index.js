@@ -5,6 +5,7 @@ import { getBusiness } from "../../store/businessDetail";
 import yummiesPic from "../images/yummies.png";
 import UpdateBusinessFrom from "../UpdateBusinessModal";
 import ConfirmDelete from "../ConfirmDelete";
+import { getReviews } from "../../store/reviews";
 
 function BusinessDetails() {
   const [title, setTitle] = useState("");
@@ -14,15 +15,16 @@ function BusinessDetails() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [reviewList, setReviewList] = useState([]);
   const { businessId } = useParams();
 
   const dispatch = useDispatch();
 
   const sessionUser = useSelector(state => state.session.user);
 
-  const business = useSelector(state => {
-    return state.businessDetail[businessId];
-  });
+  const business = useSelector(state => state.businessDetail[businessId]);
+
+  const reviews = useSelector(state => state.reviews);
 
   useEffect(() => {
     if (!business) return;
@@ -36,7 +38,12 @@ function BusinessDetails() {
   }, [business]);
 
   useEffect(() => {
+    setReviewList(...Object.values(reviews));
+  }, [reviews]);
+
+  useEffect(() => {
     dispatch(getBusiness(businessId));
+    dispatch(getReviews(businessId));
   }, [dispatch]);
 
   return (
@@ -61,6 +68,26 @@ function BusinessDetails() {
           <div>{city}</div>
           <div>{state}</div>
           <div>{zipCode}</div>
+        </div>
+        <div>
+          <h2>Reviews</h2>
+          <ul>
+            {reviewList &&
+              reviewList.map(review => {
+                {
+                  console.log("review", review);
+                }
+                return (
+                  <li key={review.id}>
+                    <div>
+                      <div>{review.User.username}</div>
+                      <div>{review.rating}</div>
+                    </div>
+                    <div>{review.comment}</div>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
       </div>
     )

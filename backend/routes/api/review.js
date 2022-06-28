@@ -2,7 +2,7 @@ const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
-const { Review, Business } = require("../../db/models");
+const { Review, Business, User } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -50,40 +50,17 @@ router.post(
 
 //All from business
 router.get(
-  "/",
-  asyncHandler(async (req, res, next) => {
-    let reviews;
-    if (req.body.businessId) {
-      const businessId = req.body.businessId;
-      reviews = await Review.findAll({
-        where: {
-          businessId,
-        },
-      });
-
-      return res.json(reviews);
-    } else {
-      const err = Error("Bad request.");
-      err.errors = ["No business id."];
-      err.status = 400;
-      err.title = "Bad request.";
-      next(err);
-    }
-  })
-);
-
-//One
-router.get(
   "/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
-    const id = req.params.id;
-    const review = await Review.findOne({
+    const businessId = req.params.id;
+    reviews = await Review.findAll({
       where: {
-        id,
+        businessId,
       },
+      include: User,
     });
 
-    return res.json(review);
+    return res.json(reviews);
   })
 );
 

@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import reviewReducer, { getReviews } from "./reviews";
 
 const CREATE_BUSINESS = "businessDetail/CREATE";
 const READ_BUSINESS = "businessDetail/READ";
@@ -48,7 +49,8 @@ export const getBusiness = businessId => async dispatch => {
 
   if (res.ok) {
     const business = await res.json();
-    dispatch(readBusinesses(business));
+    await dispatch(readBusinesses(business));
+    dispatch(getReviews(businessId));
     return business;
   }
 };
