@@ -20,9 +20,9 @@ const validateReview = [
   check("rating")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a rating.")
-    .isLength({ min: 1 })
+    .isInt({ min: 1 })
     .withMessage("Rating must be 1 or more.")
-    .isLength({ max: 5 })
+    .isInt({ max: 5 })
     .withMessage("Rating must be 5 or less."),
   handleValidationErrors,
 ];
@@ -75,14 +75,10 @@ router.patch(
   requireAuth,
   validateReview,
   asyncHandler(async (req, res, next) => {
-    console.log("req.body", req.body);
-    console.log("req.user.id", req.user.id);
     const id = req.body.id;
     const { rating, comment } = req.body;
 
     const review = await Review.findByPk(id);
-
-    console.log("review", review);
 
     if (!review) {
       const err = Error("Review not found.");
