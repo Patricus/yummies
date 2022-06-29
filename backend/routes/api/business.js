@@ -10,7 +10,6 @@ const router = express.Router();
 //Create
 
 const validateBusiness = [
-  check("ownerId").exists({ checkFalsy: true }).withMessage("Must be logged in."),
   check("title")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a title.")
@@ -35,8 +34,10 @@ const validateBusiness = [
   check("zipCode")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a zip code.")
-    .isLength({ max: 10 })
-    .withMessage("Xip code must be 10 characters or less."),
+    .isLength({ max: 10, min: 5 })
+    .withMessage("Zip code must be 5 to 10 characters.")
+    .isInt({ min: 1 })
+    .withMessage("Zip code must be a positive number."),
   handleValidationErrors,
 ];
 
@@ -103,6 +104,7 @@ router.get(
 router.patch(
   "/:id(\\d+)",
   requireAuth,
+  validateBusiness,
   asyncHandler(async (req, res, next) => {
     const id = req.params.id;
     const { title, description, address, city, state, zipCode } = req.body;
