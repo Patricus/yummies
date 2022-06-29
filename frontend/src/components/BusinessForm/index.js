@@ -32,12 +32,9 @@ function CreateBusiness() {
           zipCode,
         })
       );
-      console.log(" business", business);
       history.push(`/businesses/${business.id}`);
     } catch (e) {
-      console.log("e", e);
       const data = await e.json();
-      console.log("data", data);
       if (data && data.errors) setErrors(data.errors);
     }
   };
