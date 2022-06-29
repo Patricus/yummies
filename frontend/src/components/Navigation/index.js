@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
         <li>
           <button onClick={addRestaurant}>Create a restaurant</button>
         </li>
-        <li>
+        <li id="profileButton">
           <ProfileButton user={sessionUser} />
         </li>
       </>
