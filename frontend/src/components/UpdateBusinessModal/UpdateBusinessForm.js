@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateBusiness } from "../../store/businessDetail";
 
 function UpdateBusinessFrom({ business, setShowModal }) {
@@ -12,24 +12,29 @@ function UpdateBusinessFrom({ business, setShowModal }) {
   const [city, setCity] = useState(business.city);
   const [zipCode, setZipCode] = useState(business.zipCode);
 
+  const sessionUser = useSelector(state => state.session.user);
+
   const submit = async e => {
     e.preventDefault();
     setErrors([]);
 
-    await dispatch(
-      updateBusiness({
-        id: business.id,
-        title,
-        description,
-        address,
-        state,
-        city,
-        zipCode,
-      })
-    ).catch(async res => {
-      if (res && res.errors) setErrors(res.errors);
-    });
-    setShowModal(false);
+    try {
+      await dispatch(
+        updateBusiness({
+          id: business.id,
+          title,
+          description,
+          address,
+          state,
+          city,
+          zipCode,
+        })
+      );
+      setShowModal(false);
+    } catch (e) {
+      const { errors } = await e.json();
+      setErrors(errors);
+    }
   };
 
   return (
