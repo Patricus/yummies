@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Businesses from "./components/Businesses";
 import BusinessDetails from "./components/BusinessDetails";
 import CreateBusiness from "./components/BusinessForm";
+import AboutMe from "./components/AboutMe";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <AboutMe />
     </>
   );
 }
