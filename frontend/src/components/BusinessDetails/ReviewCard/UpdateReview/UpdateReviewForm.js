@@ -12,19 +12,21 @@ function UpdateReviewFrom({ review, setShowModal }) {
     e.preventDefault();
     setErrors([]);
 
-    await dispatch(
-      updateReview({
-        id: review.id,
-        userId: review.userId,
-        businessId: review.businessId,
-        rating,
-        comment,
-      })
-    )
-      .then(setShowModal(false))
-      .catch(async res => {
-        if (res && res.errors) setErrors(res.errors);
-      });
+    try {
+      await dispatch(
+        updateReview({
+          id: review.id,
+          userId: review.userId,
+          businessId: review.businessId,
+          rating,
+          comment,
+        })
+      );
+      setShowModal(false);
+    } catch (e) {
+      const { errors: err } = await e.json();
+      setErrors(err);
+    }
   };
 
   return (
