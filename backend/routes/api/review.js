@@ -71,36 +71,43 @@ router.get(
 //Update
 
 router.patch(
-  "/:id(\\d+)",
+  "/",
   requireAuth,
   validateReview,
   asyncHandler(async (req, res, next) => {
-    const id = req.params.id;
+    console.log("req.body", req.body);
+    console.log("req.user.id", req.user.id);
+    const id = req.body.id;
     const { rating, comment } = req.body;
 
-    const review = await Review.findOne({
-      where: {
-        id,
-      },
-    });
+    const review = await Review.findByPk(id);
 
-    if (req.user.id === review.userId) {
-      await review.update({
-        rating,
-        comment,
-      });
+    console.log("review", review);
 
-      res.status(201);
-      updatedReviewUser = await Review.findOne({
-        where: { id: review.id },
-        include: User,
-      });
-      return res.json(updatedReviewUser);
-    } else {
-      const err = Error("You do not own this business.");
-      err.status = 401;
-      err.title = "Unauthorized.";
+    if (!review) {
+      const err = Error("Review not found.");
+      err.status = 404;
+      err.title = "Not Found.";
       next(err);
+    } else {
+      if (req.user.id === review.userId) {
+        await review.update({
+          rating,
+          comment,
+        });
+
+        res.status(201);
+        updatedReviewUser = await Review.findOne({
+          where: { id: review.id },
+          include: User,
+        });
+        return res.json(updatedReviewUser);
+      } else {
+        const err = Error("You do not own this business.");
+        err.status = 401;
+        err.title = "Unauthorized.";
+        next(err);
+      }
     }
   })
 );
