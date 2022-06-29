@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addBusiness, getBusiness } from "../../store/businessDetail";
-import { allBusinesses } from "../../store/businesses";
+import { addBusiness } from "../../store/businessDetail";
 
 function CreateBusiness() {
   const dispatch = useDispatch();
@@ -21,25 +20,26 @@ function CreateBusiness() {
     e.preventDefault();
     setErrors([]);
 
-    return dispatch(
-      addBusiness({
-        ownerId: sessionUser.id,
-        title,
-        description,
-        address,
-        state,
-        city,
-        zipCode,
-      })
-    )
-      .then(async res => {
-        const { newBusiness: business } = await JSON.parse(res);
-        history.push(`/businesses/${business.id}`);
-      })
-      .catch(async res => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+    try {
+      const business = await dispatch(
+        addBusiness({
+          ownerId: sessionUser.id,
+          title,
+          description,
+          address,
+          state,
+          city,
+          zipCode,
+        })
+      );
+      console.log(" business", business);
+      history.push(`/businesses/${business.id}`);
+    } catch (e) {
+      console.log("e", e);
+      const data = await e.json();
+      console.log("data", data);
+      if (data && data.errors) setErrors(data.errors);
+    }
   };
 
   return (

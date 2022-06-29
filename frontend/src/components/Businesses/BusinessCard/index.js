@@ -4,6 +4,7 @@ import yummiesPic from "../../images/yummies.png";
 
 function BusinessCard(business) {
   const { id, title } = business;
+  const reviews = business.Reviews.reduce((total, rating) => total + rating.rating, 0);
   return (
     <Link to={`/businesses/${id}`}>
       <div className="businessCard">
@@ -12,7 +13,7 @@ function BusinessCard(business) {
         </div>
         <div className="cardData">
           <h2>{title}</h2>
-          {/* <div>{rating}</div> */}
+          <div>{reviews}</div>
         </div>
       </div>
     </Link>

@@ -2,7 +2,7 @@ const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
-const { Review, Business } = require("../../db/models");
+const { Review, Business, User } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -20,9 +20,9 @@ const validateReview = [
   check("rating")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a rating.")
-    .isLength({ min: 1 })
+    .isInt({ min: 1 })
     .withMessage("Rating must be 1 or more.")
-    .isLength({ max: 5 })
+    .isInt({ max: 5 })
     .withMessage("Rating must be 5 or less."),
   handleValidationErrors,
 ];
@@ -42,74 +42,68 @@ router.post(
     });
 
     res.status(201);
-    res.json(newReview).end();
+    newReviewUser = await Review.findOne({
+      where: { id: newReview.id },
+      include: User,
+    });
+    return res.json(newReviewUser);
   })
 );
 
 //Read
 
-//All
-router.get(
-  "/",
-  asyncHandler(async (req, res, next) => {
-    let reviews;
-    if (req.body.businessId) {
-      reviews = await Review.findAll({
-        where: {
-          businessId,
-        },
-      });
-    } else {
-      reviews = await Review.findAll();
-    }
-
-    res.json(reviews);
-  })
-);
-
-//One
+//All from business
 router.get(
   "/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
-    const id = req.params.id;
-    const review = await Review.findOne({
+    const businessId = req.params.id;
+    reviews = await Review.findAll({
       where: {
-        id,
+        businessId,
       },
+      include: User,
     });
 
-    res.json(review);
+    return res.json(reviews);
   })
 );
 
 //Update
 
 router.patch(
-  "/:id(\\d+)",
+  "/",
   requireAuth,
+  validateReview,
   asyncHandler(async (req, res, next) => {
-    const id = req.params.id;
+    const id = req.body.id;
     const { rating, comment } = req.body;
 
-    const review = await Review.findOne({
-      where: {
-        id,
-      },
-    });
+    const review = await Review.findByPk(id);
 
-    if (req.user.id === review.userId) {
-      await review.update({
-        rating,
-        comment,
-      });
-
-      res.status(201);
-      res.json(review).end();
-    } else {
-      const err = Error("You do not own this business.");
-      err.status = 401;
-      err.title = "Unauthorized.";
+    if (!review) {
+      const err = Error("Review not found.");
+      err.status = 404;
+      err.title = "Not Found.";
       next(err);
+    } else {
+      if (req.user.id === review.userId) {
+        await review.update({
+          rating,
+          comment,
+        });
+
+        res.status(201);
+        updatedReviewUser = await Review.findOne({
+          where: { id: review.id },
+          include: User,
+        });
+        return res.json(updatedReviewUser);
+      } else {
+        const err = Error("You do not own this business.");
+        err.status = 401;
+        err.title = "Unauthorized.";
+        next(err);
+      }
     }
   })
 );
@@ -131,7 +125,7 @@ router.delete(
       await review.destroy();
 
       res.status(201);
-      res.json({ message: "review deleted" }).end();
+      res.json({ message: "Review deleted." }).end();
     } else {
       const err = Error("You do not own this review.");
       err.status = 401;
