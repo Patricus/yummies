@@ -58,7 +58,7 @@ router.post(
     });
 
     res.status(201);
-    res.json(JSON.stringify({ newBusiness })).end();
+    res.json(newBusiness).end();
   })
 );
 

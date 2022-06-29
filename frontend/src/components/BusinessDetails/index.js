@@ -63,7 +63,9 @@ function BusinessDetails() {
         ) : (
           <img src={yummiesPic} alt={`Picture of ${title}`} />
         )}
-        <div>{business.Reviews.reduce((total, rating) => total + rating.rating, 0)}</div>
+        <div>
+          {business.Reviews && business.Reviews.reduce((total, rating) => total + rating.rating, 0)}
+        </div>
         {sessionUser && <CreateReview {...businessId} />}
         <p>{description}</p>
         <div>

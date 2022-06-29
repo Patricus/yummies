@@ -20,25 +20,26 @@ function CreateBusiness() {
     e.preventDefault();
     setErrors([]);
 
-    return dispatch(
-      addBusiness({
-        ownerId: sessionUser.id,
-        title,
-        description,
-        address,
-        state,
-        city,
-        zipCode,
-      })
-    )
-      .then(async res => {
-        const { newBusiness: business } = await JSON.parse(res);
-        history.push(`/businesses/${business.id}`);
-      })
-      .catch(async res => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+    try {
+      const business = await dispatch(
+        addBusiness({
+          ownerId: sessionUser.id,
+          title,
+          description,
+          address,
+          state,
+          city,
+          zipCode,
+        })
+      );
+      console.log(" business", business);
+      history.push(`/businesses/${business.id}`);
+    } catch (e) {
+      console.log("e", e);
+      const data = await e.json();
+      console.log("data", data);
+      if (data && data.errors) setErrors(data.errors);
+    }
   };
 
   return (

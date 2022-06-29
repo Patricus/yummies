@@ -83,7 +83,7 @@ export const removeBusiness = businessId => async dispatch => {
 const businessDetailReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_BUSINESS:
-      const createState = { ...state };
+      const createState = {};
       createState[action.business.id] = action.business;
       return createState;
 
