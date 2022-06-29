@@ -42,9 +42,9 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <>
-      <img src={logo} alt="logo" />
-      <ul>
+    <header>
+      <img id="logo" src={logo} alt="logo" />
+      <ul id="navlinks">
         <li>
           <NavLink exact to="/">
             Home
@@ -55,7 +55,7 @@ function Navigation({ isLoaded }) {
         </li>
         {isLoaded && sessionLinks}
       </ul>
-    </>
+    </header>
   );
 }
 
