@@ -76,6 +76,16 @@ router.get(
       },
     });
 
+    businesses.forEach(business => {
+      business.dataValues.reviewPercentage = parseFloat(
+        (
+          (business.Reviews.reduce((total, rating) => total + rating.rating, 0) /
+            business.Reviews.length) *
+          20
+        ).toFixed(1)
+      );
+    });
+
     res.json(businesses);
   })
 );
@@ -94,6 +104,14 @@ router.get(
         attributes: ["rating"],
       },
     });
+
+    business.dataValues.reviewPercentage = parseFloat(
+      (
+        (business.Reviews.reduce((total, rating) => total + rating.rating, 0) /
+          business.Reviews.length) *
+        20
+      ).toFixed(1)
+    );
 
     res.json(business);
   })

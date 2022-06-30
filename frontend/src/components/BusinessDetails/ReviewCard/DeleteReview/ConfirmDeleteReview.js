@@ -19,15 +19,17 @@ function ConfirmDeleteReviewModal({ setShowModal, reviewId }) {
   };
 
   return (
-    <>
+    <div>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <button onClick={deleteReview}>DELETE</button>
+      <button className="deleteButton" onClick={deleteReview}>
+        DELETE
+      </button>
       <button onClick={cancelDelete}>Cancel</button>
-    </>
+    </div>
   );
 }
 

@@ -8,6 +8,7 @@ import ConfirmDelete from "../ConfirmDelete";
 import { getReviews } from "../../store/reviews";
 import ReviewCard from "./ReviewCard";
 import CreateReview from "./CreateReview";
+import "./businessDetails.css";
 
 function BusinessDetails() {
   const [title, setTitle] = useState("");
@@ -48,33 +49,61 @@ function BusinessDetails() {
     dispatch(getReviews(businessId));
   }, [dispatch]);
 
+  let reviewPercentage;
+
+  if (business && business.reviewPercentage) {
+    reviewPercentage = {
+      width: business.reviewPercentage,
+    };
+  } else {
+    reviewPercentage = {
+      width: 0,
+    };
+  }
+
   return (
     business && (
       <div>
-        <h1>{title}</h1>
-        {sessionUser && sessionUser.id === business.ownerId && (
-          <>
-            <UpdateBusinessFrom {...business} />
-            <ConfirmDelete businessId={businessId} />
-          </>
-        )}
+        <div id="titleAndEdit">
+          <h1>{title}</h1>
+          {sessionUser && sessionUser.id === business.ownerId && (
+            <div>
+              <UpdateBusinessFrom {...business} />
+              <ConfirmDelete businessId={businessId} />
+            </div>
+          )}
+        </div>
         {image ? (
-          <img src={image} alt={`Picture of ${title}`} />
+          <img src={image} alt={`Picture of ${title}`} id="businessImage" />
         ) : (
-          <img src={yummiesPic} alt={`Picture of ${title}`} />
+          <img src={yummiesPic} alt={`Picture of ${title}`} id="businessImage" />
         )}
-        <div>
-          {business.Reviews && business.Reviews.reduce((total, rating) => total + rating.rating, 0)}
+        <div id="infoSection">
+          <div id="address">
+            <p>Address:</p>
+            <div>{address}</div>
+            <div>{city}</div>
+            <div>{state}</div>
+            <div>{zipCode}</div>
+          </div>
+          <div id="description">
+            <div>
+              <p>{description}</p>
+            </div>
+          </div>
+          <div id="ratingAndCreate">
+            <div className="ratings">
+              <div className="full-stars" style={reviewPercentage}>
+                <span>★★★★★</span>
+              </div>
+              <div className="empty-stars">
+                <span>★★★★★</span>
+              </div>
+            </div>
+            {sessionUser && <CreateReview {...businessId} />}
+          </div>
         </div>
-        {sessionUser && <CreateReview {...businessId} />}
-        <p>{description}</p>
-        <div>
-          <div>{address}</div>
-          <div>{city}</div>
-          <div>{state}</div>
-          <div>{zipCode}</div>
-        </div>
-        <div>
+        <div id="reviews">
           <h2>Reviews</h2>
           <ul>
             {reviewList.length &&

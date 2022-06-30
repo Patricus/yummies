@@ -3,8 +3,26 @@ import { Link } from "react-router-dom";
 import yummiesPic from "../../images/yummies.png";
 
 function BusinessCard(business) {
-  const { id, title } = business;
-  const reviews = business.Reviews.reduce((total, rating) => total + rating.rating, 0);
+  const { id, title, reviewPercentage } = business;
+
+  // const reviewPercentage = (
+  //   (business.Reviews.reduce((total, rating) => total + rating.rating, 0) /
+  //     business.Reviews.length) *
+  //   20
+  // ).toFixed(1);
+
+  let businessReviewPercentage;
+
+  if (business.reviewPercentage) {
+    businessReviewPercentage = {
+      width: business.reviewPercentage,
+    };
+  } else {
+    businessReviewPercentage = {
+      width: 0,
+    };
+  }
+
   return (
     <Link to={`/businesses/${id}`}>
       <div className="businessCard">
@@ -13,7 +31,14 @@ function BusinessCard(business) {
         </div>
         <div className="cardData">
           <h2>{title}</h2>
-          <div>{reviews}</div>
+          <div className="ratings">
+            <div className="full-stars" style={businessReviewPercentage}>
+              <span>★★★★★</span>
+            </div>
+            <div className="empty-stars">
+              <span>★★★★★</span>
+            </div>
+          </div>
         </div>
       </div>
     </Link>
