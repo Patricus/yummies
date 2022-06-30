@@ -6,6 +6,7 @@
 }
 
 header {
+  margin: 0 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,4 +62,25 @@ header {
 .profile-dropdown > li {
   font-weight: 600;
   text-shadow: 0 0 3px var(--trim-color);
+}
+
+.navLink {
+  position: relative;
+}
+
+.navLink::after {
+  content: "";
+  background-color: var(--trim-color);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transition: transform 200ms;
+}
+
+.navLink:hover::after {
+  transform: scaleX(100%);
+  transform-origin: center;
 }

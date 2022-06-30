@@ -35,7 +35,9 @@ function Navigation({ isLoaded }) {
       <>
         <li>
           <LoginFormModal />
-          <NavLink to="/signup">Sign Up</NavLink>
+          <NavLink className="navLink" to="/signup">
+            Sign Up
+          </NavLink>
         </li>
       </>
     );
@@ -46,12 +48,14 @@ function Navigation({ isLoaded }) {
       <img id="logo" src={logo} alt="logo" />
       <ul id="navlinks">
         <li>
-          <NavLink exact to="/">
+          <NavLink className="navLink" exact to="/">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/businesses">Restaurants</NavLink>
+          <NavLink className="navLink" to="/businesses">
+            Restaurants
+          </NavLink>
         </li>
         {isLoaded && sessionLinks}
       </ul>

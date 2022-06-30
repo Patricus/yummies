@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import github from "../images/github.png";
 import linkedin from "../images/linkedin.png";
 import "./aboutMe.css";
