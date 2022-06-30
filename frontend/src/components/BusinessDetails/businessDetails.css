@@ -1,0 +1,99 @@
+.ratings {
+  color: var(--bg-color);
+  font-size: 32px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  text-shadow: 0 0 2px #000;
+}
+.full-stars {
+  color: var(--trim-color);
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+}
+.empty-stars {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+#titleAndEdit {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 80vw;
+}
+#businessImage {
+  width: 80vw;
+  margin-left: 10vw;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 2px solid var(--trim-color);
+  box-shadow: 0 0 2px black;
+}
+#infoSection {
+  display: flex;
+  justify-content: space-between;
+  width: 84vw;
+  height: 150px;
+  margin-left: 8vw;
+  margin-top: 5px;
+  gap: 8px;
+}
+#address {
+  border: 5px solid var(--blue-color);
+  background-color: var(--blue-color);
+  border-radius: 5px;
+  flex-grow: 0.1;
+  height: 100%;
+  box-shadow: 0 0 3px black;
+  color: var(--trim-color);
+  font-weight: 500;
+}
+#address > p {
+  font-size: large;
+  text-decoration: underline;
+}
+#address > * {
+  margin: 2px;
+  text-shadow: 0 0 3px var(--trim-color);
+}
+#description {
+  border: 5px solid var(--blue-color);
+  flex-grow: 1;
+  margin: 0;
+  border-radius: 5px;
+  height: 100%;
+  box-shadow: 0 0 3px black;
+}
+#description > div > p {
+  margin: 0 5px;
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 0 0 8px white;
+  overflow-y: auto;
+}
+#description > div {
+  box-shadow: inset 0 0 4px 1px var(--blue-color);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+#ratingAndCreate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 5px solid var(--blue-color);
+  background-color: var(--blue-color);
+  border-radius: 5px;
+  height: 100%;
+  box-shadow: 0 0 3px black;
+}
+
+#reviews {
+}

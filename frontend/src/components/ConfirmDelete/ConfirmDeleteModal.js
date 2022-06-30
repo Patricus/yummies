@@ -23,15 +23,17 @@ function ConfirmDeleteModal({ setShowModal, businessId: { businessId } }) {
   };
 
   return (
-    <>
+    <div>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <button onClick={deleteBusiness}>DELETE</button>
+      <button className="deleteButton" onClick={deleteBusiness}>
+        DELETE
+      </button>
       <button onClick={cancelDelete}>Cancel</button>
-    </>
+    </div>
   );
 }
 

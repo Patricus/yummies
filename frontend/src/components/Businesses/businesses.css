@@ -36,3 +36,28 @@
 .cardData * {
   margin: 0;
 }
+
+.ratings {
+  color: var(--bg-color);
+  font-size: 32px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  text-shadow: 0 0 2px #000;
+}
+.full-stars {
+  color: var(--trim-color);
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+}
+.empty-stars {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
