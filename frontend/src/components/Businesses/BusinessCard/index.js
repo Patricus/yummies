@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import yummiesPic from "../../images/yummies.png";
 
 function BusinessCard(business) {
-  const { id, title, reviewPercentage } = business;
+  const { id, title, image } = business;
 
   // const reviewPercentage = (
   //   (business.Reviews.reduce((total, rating) => total + rating.rating, 0) /
@@ -23,11 +23,14 @@ function BusinessCard(business) {
     };
   }
 
+  let businessPic = yummiesPic;
+  if (image) businessPic = image;
+
   return (
     <Link to={`/businesses/${id}`}>
       <div className="businessCard">
         <div className="imgFrame">
-          <img src={yummiesPic} alt={title} />
+          <img src={businessPic} alt={title} />
         </div>
         <div className="cardData">
           <h2>{title}</h2>

@@ -15,6 +15,17 @@ const validateBusiness = [
     .withMessage("Please provide a title.")
     .isLength({ max: 95 })
     .withMessage("Title must be 95 characters or less."),
+  check("image")
+    .custom(imageInput => {
+      if (
+        imageInput.endsWith(".png") ||
+        imageInput.endsWith(".jpg") ||
+        imageInput.endsWith(".jpeg")
+      ) {
+        return true;
+      } else return false;
+    })
+    .withMessage("Please provide a png, jpg or jpeg image file."),
   check("description").exists({ checkFalsy: true }).withMessage("Please provide a description."),
   check("address")
     .exists({ checkFalsy: true })
@@ -46,11 +57,12 @@ router.post(
   requireAuth,
   validateBusiness,
   asyncHandler(async (req, res, next) => {
-    const { ownerId, title, description, address, city, state, zipCode } = req.body;
+    const { ownerId, title, image, description, address, city, state, zipCode } = req.body;
 
     const newBusiness = await Business.create({
       ownerId,
       title,
+      image,
       description,
       address,
       city,

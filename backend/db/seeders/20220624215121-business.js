@@ -8,6 +8,7 @@ module.exports = {
         {
           ownerId: 1,
           title: "Demo Eats",
+          image: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg",
           description: "Fast food demo restaurant",
           address: "555 Demo Ave.",
           city: "Demo City",
@@ -19,6 +20,7 @@ module.exports = {
         {
           ownerId: 2,
           title: "Fake Eats",
+          image: "",
           description: "Fast food fake restaurant",
           address: "556 Demo Ave.",
           city: "Demo City",
@@ -30,6 +32,7 @@ module.exports = {
         {
           ownerId: 3,
           title: "Very Fake Eats",
+          image: "https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg",
           description: "Fast food very fake restaurant",
           address: "557 Demo Ave.",
           city: "Demo City",
@@ -41,6 +44,7 @@ module.exports = {
         {
           ownerId: 1,
           title: "Eat Demoz",
+          image: "",
           description: "Super food demoz restaurant",
           address: "565 Demoz Street",
           city: "Demo City",
@@ -52,6 +56,7 @@ module.exports = {
         {
           ownerId: 2,
           title: "Fake Foodz",
+          image: "https://images.pexels.com/photos/2290753/pexels-photo-2290753.jpeg",
           description: "Fast fake foodz restaurant",
           address: "566 Demoz Street",
           city: "Demo City",
@@ -63,6 +68,7 @@ module.exports = {
         {
           ownerId: 3,
           title: "Best Foods",
+          image: "",
           description: "Best food demo restaurant",
           address: "777 Fake lane",
           city: "Fake City",
@@ -74,6 +80,7 @@ module.exports = {
         {
           ownerId: 1,
           title: "Worst Foods",
+          image: "",
           description: "Bad food demo restaurant",
           address: "778 Fake lane",
           city: "Fake City",
