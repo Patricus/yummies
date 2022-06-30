@@ -4,7 +4,8 @@ import yummiesPic from "../../images/yummies.png";
 
 function BusinessCard(business) {
   const { id, title } = business;
-  const reviews = business.Reviews.reduce((total, rating) => total + rating.rating, 0);
+  const reviews =
+    business.Reviews.reduce((total, rating) => total + rating.rating, 0) / business.Reviews.length;
   return (
     <Link to={`/businesses/${id}`}>
       <div className="businessCard">
@@ -13,7 +14,7 @@ function BusinessCard(business) {
         </div>
         <div className="cardData">
           <h2>{title}</h2>
-          <div>{reviews}</div>
+          <div>{`Rating: ${reviews.toFixed(2)}`}</div>
         </div>
       </div>
     </Link>

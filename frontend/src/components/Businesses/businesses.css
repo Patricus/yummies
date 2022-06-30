@@ -1,0 +1,38 @@
+#businesses {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.businessCard {
+  position: relative;
+  width: 400px;
+  height: 350px;
+  border: 1px solid var(--font-color);
+  box-shadow: 0 0 5px var(--font-color);
+  background-color: white;
+}
+
+.businessCard:hover {
+  box-shadow: 0 0 8px var(--blue-color);
+  top: -3px;
+}
+
+.imgFrame > img {
+  width: 400px;
+  height: 300px;
+  border-bottom: 1px solid var(--font-color);
+}
+
+.cardData {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 15px;
+  color: var(--font-color);
+}
+
+.cardData * {
+  margin: 0;
+}
