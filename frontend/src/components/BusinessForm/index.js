@@ -8,6 +8,7 @@ function CreateBusiness() {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
@@ -31,6 +32,7 @@ function CreateBusiness() {
         addBusiness({
           ownerId: sessionUser.id,
           title,
+          image,
           description,
           address,
           state,
@@ -64,6 +66,14 @@ function CreateBusiness() {
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
+            required
+          />
+          <label htmlFor="image">Image</label>
+          <input
+            name="image"
+            type="text"
+            value={image}
+            onChange={e => setImage(e.target.value)}
             required
           />
           <label htmlFor="description">Description</label>

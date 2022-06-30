@@ -106,10 +106,13 @@ function BusinessDetails() {
         <div id="reviews">
           <h2>Reviews</h2>
           <ul>
-            {reviewList.length &&
+            {reviewList.length > 0 ? (
               reviewList.map(review => {
                 return <ReviewCard {...review} key={review.id} />;
-              })}
+              })
+            ) : (
+              <h2 id="noReviews">No Reviews Yet!</h2>
+            )}
           </ul>
         </div>
       </div>
