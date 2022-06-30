@@ -44,3 +44,21 @@ header {
 #profileButton {
   position: relative;
 }
+
+#logout {
+  background-color: var(--bg-color);
+  color: var(--red-color);
+  border: 2px solid var(--red-color);
+  box-shadow: 0 0 3px black;
+}
+
+#logout:hover {
+  background-color: var(--red-color);
+  color: var(--bg-color);
+  border: 2px solid var(--bg-color);
+}
+
+.profile-dropdown > li {
+  font-weight: 600;
+  text-shadow: 0 0 3px var(--trim-color);
+}
