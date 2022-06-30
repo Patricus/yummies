@@ -31,9 +31,11 @@ function UpdateReviewFrom({ review, setShowModal }) {
 
   return (
     <form onSubmit={submit}>
-      <ul>
+      <ul id="errorList">
         {errors.map((error, index) => (
-          <li key={index}>{error}</li>
+          <li className="error" key={index}>
+            {error}
+          </li>
         ))}
       </ul>
       <label htmlFor="rating">Rating</label>

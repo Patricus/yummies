@@ -18,30 +18,3 @@
   box-sizing: border-box;
   font-size: large;
 }
-
-h1 {
-  margin-left: 12vw;
-  position: relative;
-  width: fit-content;
-  font-size: xxx-large;
-}
-
-h1:before {
-  content: "";
-  position: absolute;
-  width: 3px;
-  height: 1.25em;
-  left: -0.25em;
-  top: 0.1em;
-  background-color: var(--trim-color);
-}
-
-h1:after {
-  content: "";
-  position: absolute;
-  width: 3px;
-  height: 1.25em;
-  right: -0.25em;
-  top: 0.1em;
-  background-color: var(--trim-color);
-}

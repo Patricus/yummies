@@ -7,6 +7,18 @@
   --red-color: #d8464b;
 }
 
+#errorList {
+  list-style: none;
+}
+
+.error {
+  color: var(--red-color);
+  text-shadow: 0px 0px 1px var(--font-color);
+  font-size: large;
+  border-bottom: 1px solid var(--blue-color);
+  width: fit-content;
+}
+
 html {
   background-color: var(--bg-color);
   color: var(--font-color);
@@ -55,4 +67,78 @@ button:hover {
 
 label {
   font-weight: 600;
+}
+
+h1 {
+  margin-left: 12vw;
+  position: relative;
+  width: fit-content;
+  font-size: xxx-large;
+}
+
+h1:before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 1.25em;
+  left: -0.25em;
+  top: 0.1em;
+  background-color: var(--trim-color);
+}
+
+h1:after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 1.25em;
+  right: -0.25em;
+  top: 0.1em;
+  background-color: var(--trim-color);
+}
+
+#createForm {
+  padding: 0 20vw;
+}
+
+#createForm > form {
+  display: flex;
+  flex-direction: column;
+  margin: 5vh 5vw;
+  gap: 10px;
+}
+
+#createForm > form > label {
+  margin-left: 1vw;
+  color: var(--blue-color);
+  font-size: large;
+  position: relative;
+}
+
+#createForm > form > label::before {
+  content: "";
+  position: absolute;
+  left: -1em;
+  top: 0.5em;
+  height: 5px;
+  width: 10px;
+  background-color: var(--trim-color);
+  border: 1px solid var(--font-color);
+  border-radius: 3px;
+}
+
+#createForm > form > label::after {
+  content: ":";
+}
+
+#createForm > form > textarea {
+  height: 8em;
+  border: 2px solid var(--trim-color);
+  border-radius: 5px;
+  resize: none;
+}
+
+#createForm > form > input {
+  border: 2px solid var(--trim-color);
+  border-radius: 5px;
+  resize: none;
 }
