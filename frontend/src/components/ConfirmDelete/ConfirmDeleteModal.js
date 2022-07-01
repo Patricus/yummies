@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { removeBusiness } from "../../store/businessDetail";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import './confirmDelete.css'
 
 function ConfirmDeleteModal({ setShowModal, businessId: { businessId } }) {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ function ConfirmDeleteModal({ setShowModal, businessId: { businessId } }) {
 
   return (
     <div>
+      <h2>Delete restaurant?</h2>
+      <div>This can't be undone!</div>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>

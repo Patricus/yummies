@@ -15,7 +15,7 @@ function BusinessCard(business) {
 
   if (business.reviewPercentage) {
     businessReviewPercentage = {
-      width: business.reviewPercentage,
+      width: `${business.reviewPercentage}%`,
     };
   } else {
     businessReviewPercentage = {
@@ -30,7 +30,7 @@ function BusinessCard(business) {
     <Link to={`/businesses/${id}`}>
       <div className="businessCard">
         <div className="imgFrame">
-          <img src={businessPic} alt={title} />
+          <img src={businessPic} alt={`Picture of ${title}`} />
         </div>
         <div className="cardData">
           <h2>{title}</h2>

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBusiness } from "../../store/businessDetail";
+import "./updateBusiness.css";
 
 function UpdateBusinessFrom({ business, setShowModal }) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState(business.title);
+  const [image, setImage] = useState(business.image);
   const [description, setDescription] = useState(business.description);
   const [address, setAddress] = useState(business.address);
   const [state, setState] = useState(business.state);
@@ -23,6 +25,7 @@ function UpdateBusinessFrom({ business, setShowModal }) {
         updateBusiness({
           id: business.id,
           title,
+          image,
           description,
           address,
           state,
@@ -39,6 +42,7 @@ function UpdateBusinessFrom({ business, setShowModal }) {
 
   return (
     <form onSubmit={submit}>
+      <h2>Edit Restaurant</h2>
       <ul>
         {errors.map((error, index) => (
           <li key={index}>{error}</li>
@@ -52,6 +56,8 @@ function UpdateBusinessFrom({ business, setShowModal }) {
         onChange={e => setTitle(e.target.value)}
         required
       />
+      <label htmlFor="image">Image</label>
+      <input name="image" type="text" value={image} onChange={e => setImage(e.target.value)} />
       <label htmlFor="description">Description</label>
       <textarea
         name="description"
@@ -91,7 +97,16 @@ function UpdateBusinessFrom({ business, setShowModal }) {
         onChange={e => setZipCode(e.target.value)}
         required
       />
-      <button>Edit Restaurant</button>
+      <div className="buttons">
+        <button>Edit Restaurant</button>
+        <button
+          onClick={e => {
+            e.preventDefault();
+            setShowModal(false);
+          }}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

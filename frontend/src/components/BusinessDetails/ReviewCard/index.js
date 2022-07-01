@@ -22,7 +22,7 @@ function ReviewCard(review) {
           {sessionUser && sessionUser.id === review.userId && (
             <>
               <UpdateReviewModal {...review} />
-              <DeleteReview reviewId={review.id} />
+              <DeleteReview reviewId={review.id} businessId={review.businessId} />
             </>
           )}
         </div>
