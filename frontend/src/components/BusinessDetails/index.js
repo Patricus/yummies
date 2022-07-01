@@ -19,6 +19,7 @@ function BusinessDetails() {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [reviewList, setReviewList] = useState([]);
+  const [BusinessPic, setBusinessPic] = useState(image);
   const { businessId } = useParams();
 
   const dispatch = useDispatch();
@@ -41,6 +42,10 @@ function BusinessDetails() {
   }, [business]);
 
   useEffect(() => {
+    setBusinessPic(image);
+  }, [image]);
+
+  useEffect(() => {
     setReviewList(Object.values(reviews));
   }, [reviews]);
 
@@ -61,6 +66,10 @@ function BusinessDetails() {
     };
   }
 
+  const defaultPic = () => {
+    setBusinessPic(yummiesPic);
+  };
+
   return (
     business && (
       <div className="body">
@@ -74,11 +83,7 @@ function BusinessDetails() {
           )}
         </div>
         <div id="imageContainer">
-          {image ? (
-            <img src={image} alt={title} id="businessImage" />
-          ) : (
-            <img src={yummiesPic} alt={title} id="businessImage" />
-          )}
+          <img src={BusinessPic} alt={title} id="businessImage" onError={defaultPic} />
         </div>
         <div id="infoSection">
           <div id="address">

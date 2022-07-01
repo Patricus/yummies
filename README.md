@@ -1,44 +1,71 @@
 # Yummies
 
-Yummies is a Yelp clone for reviewing, rating and finding good restaurants
+## Link to live site:
 
-# Store Shape
+https://yummies-yelp-clone.herokuapp.com/
 
-```
-store = {
-    session: {},
-    businessDetail: {
-        businessId: {
-                businessData,
-                user: {userData for business owner},
-                reviews: {
-                    reviewId: {
-                            reviewData,
-                            user: {userData of author}
-                    },
-                    optionalOrderedList: []
-                }
-        }
-    },
-    allBusinesses: {
-        businessId: {
-            businessData,
-            user: {userData for business owner}
-        },
-        optionalOrderedList: []
-    }
-}
-```
+### Summary:
 
-# Database Schema
+Yummies is a Yelp clone for finding good restaurants. Users can rate and review restaurants, or even create their own business.
 
-![database](./db-schema.png)
+---
 
-| Project Name:      | Yummies                                                                                              |
-| ------------------ | ---------------------------------------------------------------------------------------------------- |
-| Clone:             | Yelp                                                                                                 |
-| Feature List:      | https://github.com/Patricus/yummies/wiki/Feature-List                                                |
-| DB Schema Diagram: | https://github.com/Patricus/yummies/wiki/Database-Schema                                             |
-| Github:            | https://github.com/Patricus/yummies                                                                  |
-| Scorecard:         | https://docs.google.com/spreadsheets/d/1vL2WYkjoabmHcvXTzYA17KetT6taJSsOs4etr3ozCqw/edit?usp=sharing |
-| Live Link:         | https://yummies-yelp-clone.herokuapp.com/                                                            |
+## Screen Shots
+
+### Home Page
+
+![Home Page](./homePage.png)
+
+### Restaurants Page
+
+![Restaurants Page](./restaurantPage.png)
+
+### Restaurant Details Page
+
+![Restaurant Details Page](./businessDetailPage.png)
+
+### Sign Up Page
+
+![Sign Up Page](./signUpPage.png)
+
+---
+
+## Languages and tech
+
+- CSS
+- HTML
+- Javascript
+
+<!-- -->
+
+- Express
+- Node JS
+- React
+- Redux
+- Postgres
+- Sequelize
+
+---
+
+## Features
+
+- Sign up / Log in (or Demo User)
+- Create / Read / Update / Delete Restaurants
+- Create / Read / Update / Delete Reviews
+
+---
+
+## TODOs & Future Features
+
+- AWS Image Upload
+- Likes for restaurants
+- Search for restaurants
+- Google Maps
+
+---
+
+## Technical Implementation Details
+
+Updating the total review rating when a user creates, updates, or deletes a review gave me some trouble. Figuring out how to get that to re-render after those events seemed harder than I thought it would be. After some thought I realized using a dispatch I could re-render the business with it's updated review rating.
+
+![Submit Dispatch](./submitDispatch.png)
