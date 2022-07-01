@@ -155,16 +155,3 @@
 #chooseRating:hover > input:checked ~ label::before {
   opacity: 0.4;
 }
-
-#rating-container > label:hover:before,
-#rating-container > label:hover ~ label:before {
-  opacity: 1 !important;
-}
-
-#rating-container > input:checked ~ label:before {
-  opacity: 1;
-}
-
-#rating-container:hover > input:checked ~ label::before {
-  opacity: 0.4;
-}
