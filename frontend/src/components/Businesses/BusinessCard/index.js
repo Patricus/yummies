@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import yummiesPic from "../../images/yummies.png";
 
 function BusinessCard(business) {
   const { id, title, image } = business;
 
-  // const reviewPercentage = (
-  //   (business.Reviews.reduce((total, rating) => total + rating.rating, 0) /
-  //     business.Reviews.length) *
-  //   20
-  // ).toFixed(1);
+  const [businessPic, setBusinessPic] = useState(image);
 
   let businessReviewPercentage;
 
@@ -23,14 +19,15 @@ function BusinessCard(business) {
     };
   }
 
-  let businessPic = yummiesPic;
-  if (image) businessPic = image;
+  const defaultPic = () => {
+    setBusinessPic(yummiesPic);
+  };
 
   return (
     <Link to={`/businesses/${id}`}>
       <div className="businessCard">
         <div className="imgFrame">
-          <img src={businessPic} alt={`Picture of ${title}`} />
+          <img src={businessPic} onError={defaultPic} alt={`Picture of ${title}`} />
         </div>
         <div className="cardData">
           <h2>{title}</h2>
