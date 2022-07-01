@@ -17,7 +17,7 @@ function Businesses() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="body">
       <h1>Restaurants</h1>
       <ul id="businesses">
         {businesses &&

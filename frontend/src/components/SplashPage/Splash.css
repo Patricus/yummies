@@ -3,7 +3,8 @@
 }
 
 .picText > * {
-  width: 48vw;
+  width: 47.3vw;
+  margin: 0 2vw;
 }
 
 .picText > img {

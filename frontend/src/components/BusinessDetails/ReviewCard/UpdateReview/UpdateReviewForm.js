@@ -42,14 +42,23 @@ function UpdateReviewFrom({ review, setShowModal }) {
           </li>
         ))}
       </ul>
-      <label htmlFor="rating">Rating</label>
-      <input
-        name="rating"
-        type="number"
-        value={rating}
-        onChange={e => setRating(e.target.value)}
-        required
-      />
+      <label>Rating</label>
+      <div id="chooseRating" onChange={e => setRating(e.target.value)}>
+        <input type="radio" id="5star" name="rating" value={5} />
+        <label htmlFor="5star">★</label>
+
+        <input type="radio" id="4star" name="rating" value={4} />
+        <label htmlFor="4star">★</label>
+
+        <input type="radio" id="3star" name="rating" value={3} />
+        <label htmlFor="3star">★</label>
+
+        <input type="radio" id="2star" name="rating" value={2} />
+        <label htmlFor="2star">★</label>
+
+        <input type="radio" id="1star" name="rating" value={1} />
+        <label htmlFor="1star">★</label>
+      </div>
       <label htmlFor="comment">Comment</label>
       <textarea name="comment" value={comment} onChange={e => setComment(e.target.value)} />
       <div className="buttons">

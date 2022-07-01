@@ -4,10 +4,10 @@ import "./Splash.css";
 
 function SplashPage() {
   return (
-    <>
+    <div className="body">
       <h1>Welcome to Yummies</h1>
       <div className="picText">
-        <img src={burger} />
+        <img src={burger} alt="burger" />
         <p>
           Browse many restaurants that users have created, or login and create your own restaurant!
         </p>
@@ -17,9 +17,9 @@ function SplashPage() {
           Read reviews and ratings that users have posted on each restaurant. Log in and write your
           own review!
         </p>
-        <img src={salad} />
+        <img src={salad} alt="salad" />
       </div>
-    </>
+    </div>
   );
 }
 

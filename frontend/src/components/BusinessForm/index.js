@@ -49,7 +49,7 @@ function CreateBusiness() {
   };
 
   return (
-    <>
+    <div className="body">
       <h1>Create a Restaurant</h1>
       <div id="createForm">
         <form onSubmit={submit}>
@@ -118,7 +118,7 @@ function CreateBusiness() {
           <button>Create Restaurant</button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 
