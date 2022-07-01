@@ -155,3 +155,8 @@
 #chooseRating:hover > input:checked ~ label::before {
   opacity: 0.4;
 }
+
+#titleAndEdit > h1 {
+  max-width: 45vw;
+  word-wrap: break-word;
+}
