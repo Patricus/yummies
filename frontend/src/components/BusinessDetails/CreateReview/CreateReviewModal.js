@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getBusiness } from "../../../store/businessDetail";
 import { addReview } from "../../../store/reviews";
 
 function UpdateReviewFrom({ businessId, setShowModal }) {
@@ -23,6 +24,8 @@ function UpdateReviewFrom({ businessId, setShowModal }) {
           comment,
         })
       );
+      await dispatch(getBusiness(businessId[0]));
+
       setShowModal(false);
     } catch (e) {
       const { errors: err } = await e.json();
@@ -32,6 +35,7 @@ function UpdateReviewFrom({ businessId, setShowModal }) {
 
   return (
     <form onSubmit={submit}>
+      <h2>Create a Review</h2>
       <ul id="errorList">
         {errors.map((error, index) => (
           <li className="error" key={index}>
@@ -49,14 +53,16 @@ function UpdateReviewFrom({ businessId, setShowModal }) {
       />
       <label htmlFor="comment">Comment</label>
       <textarea name="comment" value={comment} onChange={e => setComment(e.target.value)} />
-      <button>Create Review</button>
-      <button
-        onClick={e => {
-          e.preventDefault();
-          setShowModal(false);
-        }}>
-        Cancel
-      </button>
+      <div className="buttons">
+        <button>Create Review</button>
+        <button
+          onClick={e => {
+            e.preventDefault();
+            setShowModal(false);
+          }}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../../../context/Modal";
 import ConfirmDeleteReviewModal from "./ConfirmDeleteReview";
 
-function DeleteReview(reviewId) {
+function DeleteReview({ reviewId, businessId }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -10,7 +10,11 @@ function DeleteReview(reviewId) {
       <button onClick={() => setShowModal(true)}>Delete Review</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <ConfirmDeleteReviewModal {...reviewId} setShowModal={setShowModal} />
+          <ConfirmDeleteReviewModal
+            reviewId={reviewId}
+            businessId={businessId}
+            setShowModal={setShowModal}
+          />
         </Modal>
       )}
     </>

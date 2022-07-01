@@ -53,7 +53,7 @@ function BusinessDetails() {
 
   if (business && business.reviewPercentage) {
     reviewPercentage = {
-      width: business.reviewPercentage,
+      width: `${business.reviewPercentage}%`,
     };
   } else {
     reviewPercentage = {
@@ -73,11 +73,13 @@ function BusinessDetails() {
             </div>
           )}
         </div>
-        {image ? (
-          <img src={image} alt={`Picture of ${title}`} id="businessImage" />
-        ) : (
-          <img src={yummiesPic} alt={`Picture of ${title}`} id="businessImage" />
-        )}
+        <div id="imageContainer">
+          {image ? (
+            <img src={image} alt={`Picture of ${title}`} id="businessImage" />
+          ) : (
+            <img src={yummiesPic} alt={`Picture of ${title}`} id="businessImage" />
+          )}
+        </div>
         <div id="infoSection">
           <div id="address">
             <p>Address:</p>

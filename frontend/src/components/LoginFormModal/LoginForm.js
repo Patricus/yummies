@@ -28,6 +28,7 @@ function LoginForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <h2>Log In</h2>
         <ul id="errorList">
           {errors.map((error, idx) => (
             <li className="error" key={idx}>
@@ -53,7 +54,7 @@ function LoginForm() {
             required
           />
         </label>
-        <div>
+        <div className="buttons">
           <button type="button" onClick={demoLogin}>
             Login as Demo User
           </button>
