@@ -24,6 +24,7 @@ const validateReview = [
     .withMessage("Rating must be 1 or more.")
     .isInt({ max: 5 })
     .withMessage("Rating must be 5 or less."),
+  check("comment").exists({ checkFalsy: true }).withMessage("Please provide a comment."),
   handleValidationErrors,
 ];
 
