@@ -10,7 +10,6 @@ div#root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 footer {
@@ -24,8 +23,8 @@ footer {
   justify-self: flex-end;
 }
 
-#root:last-child {
-  height: 0;
+#root > .body {
+  flex-grow: 1;
 }
 
 footer h2 {

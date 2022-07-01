@@ -47,7 +47,7 @@ function BusinessDetails() {
   useEffect(() => {
     dispatch(getBusiness(businessId));
     dispatch(getReviews(businessId));
-  }, [dispatch]);
+  }, [dispatch, businessId]);
 
   let reviewPercentage;
 
@@ -63,7 +63,7 @@ function BusinessDetails() {
 
   return (
     business && (
-      <div>
+      <div className="body">
         <div id="titleAndEdit">
           <h1>{title}</h1>
           {sessionUser && sessionUser.id === business.ownerId && (
@@ -75,9 +75,9 @@ function BusinessDetails() {
         </div>
         <div id="imageContainer">
           {image ? (
-            <img src={image} alt={`Picture of ${title}`} id="businessImage" />
+            <img src={image} alt={title} id="businessImage" />
           ) : (
-            <img src={yummiesPic} alt={`Picture of ${title}`} id="businessImage" />
+            <img src={yummiesPic} alt={title} id="businessImage" />
           )}
         </div>
         <div id="infoSection">

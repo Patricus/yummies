@@ -35,7 +35,6 @@
 #imageContainer {
   width: 80vw;
   height: 50vw;
-  /* max-width: 700px; */
   max-height: 600px;
   margin-left: 10vw;
   margin-top: 10px;
@@ -110,4 +109,62 @@
 
 #noReviews {
   font-size: 48px;
+}
+
+#chooseRating {
+  display: flex;
+  flex-direction: row-reverse;
+  border: 2px solid var(--trim-color);
+  border-radius: 5px;
+  padding: 6px 2px;
+  background-color: white;
+}
+
+#chooseRating > div {
+  position: relative;
+}
+
+#chooseRating input {
+  display: none;
+}
+
+#chooseRating label {
+  margin: 0 16px;
+  font-size: 32px;
+  color: var(--bg-color);
+  text-shadow: 0 0 2px black;
+  cursor: pointer;
+}
+
+#chooseRating > label::before {
+  content: "★";
+  position: absolute;
+  color: var(--trim-color);
+  opacity: 0;
+}
+
+#chooseRating > label:hover:before,
+#chooseRating > label:hover ~ label:before {
+  opacity: 1 !important;
+}
+
+#chooseRating > input:checked ~ label:before {
+  opacity: 1;
+}
+
+#chooseRating:hover > input:checked ~ label::before {
+  opacity: 0.4;
+}
+
+#rating-container > label:hover:before,
+#rating-container > label:hover ~ label:before {
+  opacity: 1 !important;
+}
+
+#rating-container > input:checked ~ label:before {
+  opacity: 1;
+}
+
+#rating-container:hover > input:checked ~ label::before {
+  opacity: 0.4;
 }
