@@ -98,7 +98,7 @@ function UpdateReviewFrom({ review, setShowModal }) {
       <textarea
         name="comment"
         value={comment}
-        onChange={e => setComment(+e.target.value)}
+        onChange={e => setComment(e.target.value)}
         required
       />
       <div className="buttons">
