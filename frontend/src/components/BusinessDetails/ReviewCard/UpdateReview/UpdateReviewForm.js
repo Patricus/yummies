@@ -43,24 +43,64 @@ function UpdateReviewFrom({ review, setShowModal }) {
         ))}
       </ul>
       <label>Rating</label>
-      <div id="chooseRating" onChange={e => setRating(e.target.value)}>
-        <input type="radio" id="5star" name="rating" value={5} />
+      <div id="chooseRating">
+        <input
+          type="radio"
+          id="5star"
+          name="rating"
+          value={5}
+          checked={5 === rating}
+          onChange={e => setRating(+e.target.value)}
+        />
         <label htmlFor="5star">★</label>
 
-        <input type="radio" id="4star" name="rating" value={4} />
+        <input
+          type="radio"
+          id="4star"
+          name="rating"
+          value={4}
+          checked={4 === rating}
+          onChange={e => setRating(+e.target.value)}
+        />
         <label htmlFor="4star">★</label>
 
-        <input type="radio" id="3star" name="rating" value={3} />
+        <input
+          type="radio"
+          id="3star"
+          name="rating"
+          value={3}
+          checked={3 === rating}
+          onChange={e => setRating(+e.target.value)}
+        />
         <label htmlFor="3star">★</label>
 
-        <input type="radio" id="2star" name="rating" value={2} />
+        <input
+          type="radio"
+          id="2star"
+          name="rating"
+          value={2}
+          checked={2 === rating}
+          onChange={e => setRating(+e.target.value)}
+        />
         <label htmlFor="2star">★</label>
 
-        <input type="radio" id="1star" name="rating" value={1} />
+        <input
+          type="radio"
+          id="1star"
+          name="rating"
+          value={1}
+          checked={1 === rating}
+          onChange={e => setRating(+e.target.value)}
+        />
         <label htmlFor="1star">★</label>
       </div>
       <label htmlFor="comment">Comment</label>
-      <textarea name="comment" value={comment} onChange={e => setComment(e.target.value)} />
+      <textarea
+        name="comment"
+        value={comment}
+        onChange={e => setComment(+e.target.value)}
+        required
+      />
       <div className="buttons">
         <button>Edit Review</button>
         <button

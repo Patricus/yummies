@@ -61,7 +61,12 @@ function UpdateReviewFrom({ businessId, setShowModal }) {
         <label htmlFor="1star">★</label>
       </div>
       <label htmlFor="comment">Comment</label>
-      <textarea name="comment" value={comment} onChange={e => setComment(e.target.value)} />
+      <textarea
+        name="comment"
+        value={comment}
+        onChange={e => setComment(e.target.value)}
+        required
+      />
       <div className="buttons">
         <button>Create Review</button>
         <button

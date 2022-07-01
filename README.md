@@ -57,7 +57,8 @@ Yummies is a Yelp clone for finding good restaurants. Users can rate and review 
 
 ## TODOs & Future Features
 
-- AWS Image Upload
+- 404 Page
+- AWS Image upload
 - Likes for restaurants
 - Search for restaurants
 - Google Maps
