@@ -55,6 +55,20 @@ Yummies is a Yelp clone for finding good restaurants. Users can rate and review 
 
 ---
 
+## How to run
+
+### Front-end
+
+- Run `npm install` in the _frontend_ directory
+- And then `npm start`
+
+### Back-end
+
+- Run `npm install` in the _backend_ directory
+- And then `npm start`
+
+---
+
 ## TODOs & Future Features
 
 - 404 Page
