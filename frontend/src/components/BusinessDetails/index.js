@@ -21,6 +21,7 @@ function BusinessDetails() {
   const [reviewList, setReviewList] = useState([]);
   const [BusinessPic, setBusinessPic] = useState(image);
   const { businessId } = useParams();
+  console.log("businessId", businessId);
 
   const dispatch = useDispatch();
 
@@ -107,7 +108,7 @@ function BusinessDetails() {
                 <span>★★★★★</span>
               </div>
             </div>
-            {sessionUser && <CreateReview {...businessId} />}
+            {sessionUser && <CreateReview businessId={businessId} />}
           </div>
         </div>
         <div id="reviews">
