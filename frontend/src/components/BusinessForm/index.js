@@ -42,7 +42,6 @@ function CreateBusiness() {
       );
       history.push(`/businesses/${business.id}`);
     } catch (e) {
-      console.log("e", e);
       const data = await e.json();
       if (data && data.errors) setErrors(data.errors);
     }

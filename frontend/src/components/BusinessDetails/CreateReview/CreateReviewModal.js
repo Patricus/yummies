@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBusiness } from "../../../store/businessDetail";
 import { addReview } from "../../../store/reviews";
 
-function UpdateReviewFrom({ businessId, setShowModal }) {
+function CreateReviewModal({ businessId, setShowModal }) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [rating, setRating] = useState(0);
@@ -19,12 +19,12 @@ function UpdateReviewFrom({ businessId, setShowModal }) {
       await dispatch(
         addReview({
           userId: sessionUser.id,
-          businessId: businessId[0],
+          businessId: businessId,
           rating,
           comment,
         })
       );
-      await dispatch(getBusiness(businessId[0]));
+      await dispatch(getBusiness(businessId));
 
       setShowModal(false);
     } catch (e) {
@@ -81,4 +81,4 @@ function UpdateReviewFrom({ businessId, setShowModal }) {
   );
 }
 
-export default UpdateReviewFrom;
+export default CreateReviewModal;

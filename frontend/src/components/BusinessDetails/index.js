@@ -107,7 +107,7 @@ function BusinessDetails() {
                 <span>★★★★★</span>
               </div>
             </div>
-            {sessionUser && <CreateReview {...businessId} />}
+            {sessionUser && <CreateReview businessId={businessId} />}
           </div>
         </div>
         <div id="reviews">
