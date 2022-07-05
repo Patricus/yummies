@@ -30,7 +30,6 @@ const deleteReview = reviewId => ({
 //Thunks
 
 export const addReview = review => async dispatch => {
-  console.log("review", review);
   const res = await csrfFetch("/api/reviews", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

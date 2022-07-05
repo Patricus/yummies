@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBusiness } from "../../../store/businessDetail";
-import { addReview, getReviews } from "../../../store/reviews";
+import { addReview } from "../../../store/reviews";
 
 function CreateReviewModal({ businessId, setShowModal }) {
   const dispatch = useDispatch();
@@ -11,7 +11,6 @@ function CreateReviewModal({ businessId, setShowModal }) {
 
   const sessionUser = useSelector(state => state.session.user);
 
-  console.log("CreateReviewBusinessId", businessId);
   const submit = async e => {
     e.preventDefault();
     setErrors([]);

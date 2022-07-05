@@ -21,7 +21,6 @@ function BusinessDetails() {
   const [reviewList, setReviewList] = useState([]);
   const [BusinessPic, setBusinessPic] = useState(image);
   const { businessId } = useParams();
-  console.log("businessId", businessId);
 
   const dispatch = useDispatch();
 

@@ -5,7 +5,6 @@ import CreateReviewModal from "./CreateReviewModal";
 function CreateReview(business) {
   const [showModal, setShowModal] = useState(false);
   const { businessId } = business;
-  console.log("createReview-businessId", businessId);
 
   return (
     <>
