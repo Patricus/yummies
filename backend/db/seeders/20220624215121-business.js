@@ -1,9 +1,15 @@
 "use strict";
 
+let options = {};
+if (process.env.NODE_ENV === "production") {
+    options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
     up: (queryInterface, Sequelize) => {
+        options.tableName = "Businesses";
         return queryInterface.bulkInsert(
-            "Businesses",
+            options,
             [
                 {
                     ownerId: 1,
@@ -101,6 +107,7 @@ module.exports = {
     },
 
     down: (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete("Businesses", null, {});
+        options.tableName = "Businesses";
+        return queryInterface.bulkDelete(options, null, {});
     },
 };
