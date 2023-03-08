@@ -2,7 +2,7 @@
 
 ## Link to live site:
 
-https://yummies-yelp-clone.herokuapp.com/
+https://yummies.onrender.com/
 
 ### Summary:
 
